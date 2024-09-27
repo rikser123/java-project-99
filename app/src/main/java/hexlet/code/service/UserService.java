@@ -63,5 +63,6 @@ public class UserService {
         }
         userRepository.deleteById(id);
     }
-
 }
+
+// Свободный путь до индекса
