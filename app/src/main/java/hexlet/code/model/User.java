@@ -11,14 +11,16 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Getter()
 @Setter()
 @Entity
-@Table(name="users")
+@Table(name = "users")
 @EntityListeners(AuditingEntityListener.class)
 public class User {
     @Id
@@ -42,7 +44,10 @@ public class User {
     @NotNull
     private String password;
 
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
+    @CreatedDate
+    private LocalDate createdAt;
+
+    @LastModifiedDate
+    private LocalDate updatedAt;
 
 }
