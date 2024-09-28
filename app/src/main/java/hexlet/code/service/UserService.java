@@ -61,6 +61,10 @@ public class UserService {
         if (!user.getEmail().equals(currentUser.getEmail())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
+
+        if (user.getTasks().size() > 0) {
+            throw new ResponseStatusException((HttpStatus.INTERNAL_SERVER_ERROR));
+        }
         userRepository.deleteById(id);
     }
 }

@@ -7,7 +7,10 @@ import hexlet.code.execption.ResourceNotFoundException;
 import hexlet.code.mapper.TaskStatusMapper;
 import hexlet.code.repository.TaskStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 
 @Service
@@ -44,6 +47,11 @@ public class TaskStatusService {
     }
 
     public void delete(Long id) {
+        var currentStatus = taskStatusRepository.findById(id).get();
+        if (currentStatus.getTasks().size() > 0) {
+            throw new ResponseStatusException((HttpStatus.INTERNAL_SERVER_ERROR));
+        }
+
         taskStatusRepository.deleteById(id);
     }
 }
