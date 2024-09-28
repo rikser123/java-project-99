@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.openapitools.jackson.nullable.JsonNullable;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class TaskUpdateDTO {
@@ -12,6 +14,7 @@ public class TaskUpdateDTO {
     private JsonNullable<String> title;
     private JsonNullable<String> content;
     private JsonNullable<Integer> index;
+    private JsonNullable<List<Long>> taskLabelIds;
     @NotBlank
     private JsonNullable<String> status;
     //CHECKSTYLE.OFF: MemberName - Much more readable than catching 7 exceptions
