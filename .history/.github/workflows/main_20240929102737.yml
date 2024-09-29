@@ -14,9 +14,11 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-      - uses: gradle/gradle-build-action@v2
+      - uses: gradle/gradle-build-action@v3
         with:
-          gradle-version: 8.5
+          gradle-version: 8.7
+          arguments: build
+          build-root-directory: app
       - name: Publish code coverage
         if: ${{ github.event_name == 'push' }}
         uses: paambaati/codeclimate-action@v5.0.0

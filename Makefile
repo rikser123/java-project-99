@@ -1,18 +1,36 @@
-Makefile.DEFAULT_GOAL := build-run
+.DEFAULT_GOAL := build-run
+
+setup:
+	./gradlew wrapper --gradle-version 8.5
+
+clean:
+	./gradlew clean
+
+build:
+	./gradlew clean build
+
+install:
+	./gradlew clean install
 
 run-dist:
-	make -C app run-dist
-build:
-	make -C app build
+	./build/install/app/bin/app
+
 run:
-	make -C app run
+	./gradlew run
+
 test:
-	make -C app test
+	./gradlew test
 
 report:
-	make -C app report
+	./gradlew jacocoTestReport
 
-build-run:
-	build run
+lint:
+	./gradlew checkstyleMain
+
+check-deps:
+	./gradlew dependencyUpdates -Drevision=release
+
+
+build-run: build run
 
 .PHONY: build
