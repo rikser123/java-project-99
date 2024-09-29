@@ -61,7 +61,10 @@ public abstract class TaskMapper {
 
     @Named("assigneeModel")
     public User findUser(Long id) {
-        return userRepository.findById(id).get();
+        if (id == null) {
+            return null;
+        }
+        return userRepository.findById(id).orElse(null);
     }
 
     @Named("taskStatusModel")
