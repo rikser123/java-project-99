@@ -1,7 +1,6 @@
 package hexlet.code.cotroller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hexlet.code.dto.UserUpdateDTO;
 import hexlet.code.mapper.UserMapper;
 import hexlet.code.model.User;
 import hexlet.code.repository.UserRepository;
@@ -15,7 +14,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
-import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
@@ -62,7 +60,7 @@ public class UserControllerTest {
                 .supply(Select.field(User::getEmail), () -> faker.internet().emailAddress())
                 .create();
 
-        token =jwt().jwt(builder -> builder.subject("hexlet@example.com"));
+        token = jwt().jwt(builder -> builder.subject("hexlet@example.com"));
     }
 
     @Test
@@ -71,7 +69,7 @@ public class UserControllerTest {
         var result = mockMvc.perform(get("/api/users").with(token))
                 .andExpect(status().isOk())
                 .andReturn();
-        var body =result.getResponse().getContentAsString();
+        var body = result.getResponse().getContentAsString();
         assertThatJson(body).isArray();
     }
 
